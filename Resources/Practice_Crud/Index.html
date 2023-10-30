@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="module.js"></script>
+</head>
+
+<body ng-app="userApp" ng-controller="userCtrl">
+    <!-- <div class="container"> -->
+        <div class="row mt-sm-2">
+            <div class="col md-7 m-2">
+                <div>
+                <input type="search" class="form-control"ng-model="search" placeholder="Search any user">
+            </div>
+
+                <h3 class="text-center">All Users</h3>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <th>User ID</th>
+                        <th>User Name</th>
+                        <th>User Role</th>
+                        <th>User Age</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="i in filteredUsers = (userData | filter: search)">
+                            <td>{{i.userID}}</td>
+                            <td>{{i.userName}}</td>
+                            <td>{{i.userRole}}</td>
+                            <td>{{i.age}}</td>
+                            <td>
+                                <button class="btn btn-warning" ng-click="updateItem(i)"
+                                    style="color:whitesmoke">Edit</button>
+                                <button class="btn btn-danger" ng-click="deleteItem(i.userID)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6 col-md-5 m-2">
+                <h3 class="text-center">Add New User</h3>
+                <form ng-submit="addUser()">
+                    <input type="text" class="form-control" placeholder="Enter User ID" ng-model="newuserData.userID">
+                    <input type="text" class="form-control" placeholder="Enter User Name"
+                        ng-model="newuserData.userName">
+                    <input type="text" class="form-control" placeholder="Enter User Role"
+                        ng-model="newuserData.userRole">
+                    <input type="text" class="form-control" placeholder="Enter User Age" ng-model="newuserData.age">
+                
+                <div class="text-center mt-1 ">
+                    <button type="submit" value="Add User" class="btn btn-primary text">Add User</button>
+                </div>
+                </form>
+            </div>
+        </div>
+        <h3 class="text-center mt-2">Update User Details</h3>
+        <form ng-show="edit" method="post" ng-submit="editItem(updatedItem)">
+            <input type="text" class="form-control" placeholder="Enter User ID" ng-model="updatedItem.userID"
+                ng-disabled="true">
+            <input type="text" class="form-control" placeholder="Enter User Name" ng-model="updatedItem.userName">
+            <input type="text" class="form-control" placeholder="Enter User Role" ng-model="updatedItem.userRole">
+            <input type="text" class="form-control" placeholder="Enter User Age" ng-model="updatedItem.age">
+    
+            <button type="submit" value="Update User" class="btn btn-warning">Update User</button>
+        </form>
+    
+    <!-- </div> -->
+</body>
+
+</html>

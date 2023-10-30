@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="modal.js"></script>
+</head>
+  <body ng-app="MyApp" ng-controller="MyController">
+    <div class="container">
+      <div class="card card-body">
+        <h1>Login Here</h1>
+        <form ng-submit="checkUser()">
+          <label for="Email" class="my-2">Email</label>
+          <input type="text" id="Email" class="form-control" ng-model="email">
+          <label for="Password" class="my-2">Password</label>
+          <input type="text" id="Password" class="form-control" ng-model="password">
+          <button type="submit" class="btn btn-dark my-2">Login</button>
+        </form>
+        <div ng-repeat="i in UsersList" ng-if="flag == 1">
+          <div ng-if="i.Email == email && i.Password == password">
+            <div ng-if="i.Role == 'staff'">
+              <table class="table table-bordered">
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Password</th>
+                  <th>Email</th>
+                  <th>Designation</th>
+                  <th>Department</th>
+                  <th>Salary</th>
+                </tr>
+                <tr>
+                  <td>{{i.EmpID}}</td>
+                  <td>{{i.EmpName}}</td>
+                  <td>{{i.Role}}</td>
+                  <td>{{i.Password}}</td>
+                  <td>{{i.Email}}</td>
+                  <td>{{i.Designation}}</td>
+                  <td>{{i.EmpDept}}</td>
+                  <td>{{i.EmpSalary}}</td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              
+                <table class="table table-bordered">
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Designation</th>
+                    <th>Department</th>
+                    <th>Salary</th>
+                    <th>delete</th>
+                  </tr>
+                  <tr ng-repeat="j in UsersList">
+                    <td>{{j.EmpID}}</td>
+                    <td>{{j.EmpName}}</td>
+                    <td>{{j.Role}}</td>
+                    <td>{{j.Password}}</td>
+                    <td>{{j.Email}}</td>
+                    <td>{{j.Designation}}</td>
+                    <td>{{j.EmpDept}}</td>
+                    <td>{{j.EmpSalary}}</td>
+                    <td ng-if="i.Role == 'admin'"><input type="button" value="Delete" class="btn btn-dark"></td>
+                  </tr>
+                </table>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+        <form ng-submit="add()" method="post">
+            <label>Enter  ID: </label>
+            <input type="text" ng-model="data.EmpID"><br>
+            <label>Enter Name: </label>
+            <input type="text" ng-model="data.EmpName"><br>
+            <label>Enter role: </label>
+            <input type="text" ng-model="data.Role"><br>
+            <label>Enter password: </label>
+            <input type="text" ng-model="data.Password"><br>
+            <label>Enter email: </label>
+            <input type="text" ng-model="data.Email"><br>
+            <label>Designation </label>
+            <input type="text" ng-model="data.Designation"><br>
+            <label>Department: </label>
+            <input type="text" ng-model="data.EmpDept"><br>
+            <label>salary </label>
+            <input type="text" ng-model="data.EmpSalary"><br>
+
+            <input type="submit">
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
